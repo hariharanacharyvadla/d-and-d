@@ -1,0 +1,187 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oscillate Marketing</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #060D0C; /* Luxe Noir */
+      color: #F0EDE5; /* Soft Oat */
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 480px;
+      margin: 50px auto;
+      padding: 25px;
+      background-color: #0B1311; /* Slightly lighter Luxe Noir for contrast */
+      border-radius: 12px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+    }
+    h1 {
+      text-align: center;
+      color: #F0EDE5; /* Soft Oat */
+      margin-bottom: 20px;
+      font-size: 28px;
+      font-weight: 600;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      margin: 10px 0;
+      border: 1px solid #F0EDE5;
+      border-radius: 8px;
+      background-color: transparent;
+      color: #F0EDE5;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, select:focus {
+      border-color: #D8D1C4; /* softer oat tone */
+    }
+    a.button-link, button {
+      display: inline-block;
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      background-color: #F0EDE5; /* Soft Oat */
+      color: #060D0C; /* Luxe Noir text */
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    a.button-link:hover, button:hover {
+      background-color: #D8D1C4; /* slightly darker oat */
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid #F0EDE5;
+      color: #F0EDE5;
+    }
+    .btn-secondary:hover {
+      background-color: #F0EDE5;
+      color: #060D0C;
+    }
+    .hidden {
+      display: none;
+    }
+    .order-item {
+      background-color: rgba(240, 237, 229, 0.05); /* light oat overlay */
+      padding: 14px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(240, 237, 229, 0.2);
+    }
+    p {
+      text-align: center;
+      font-size: 15px;
+    }
+    a.text-link {
+      color: #F0EDE5;
+      text-decoration: underline;
+    }
+    a.text-link:hover {
+      color: #D8D1C4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sign Up Page -->
+  <div class="container" id="signupPage">
+    <h1>Sign Up</h1>
+    <input type="text" placeholder="Name">
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <a href="./home.html" onclick="goToHome()" class="button-link">Sign Up</a>
+    <p>Already have an account? <a href="./home.html" onclick="goToHome()" class="text-link">Go to Home</a></p>
+  </div>
+
+  <!-- Home Page -->
+  <div class="container hidden" id="homePage">
+    <h1>Welcome</h1>
+    <button onclick="goToDeal()">Deal</button>
+    <button class="btn-secondary" onclick="goToDemand()">Demand</button>
+  </div>
+
+  <!-- Deal Page -->
+  <div class="container hidden" id="dealPage">
+    <h1>Deals</h1>
+    <div class="order-item">
+      Order #1
+      <button onclick="confirmOrder(this)">Accept Order</button>
+      <button onclick="removeOrder(this)" class="btn-secondary">Remove</button>
+    </div>
+    <div class="order-item">
+      Order #2
+      <button onclick="confirmOrder(this)">Accept Order</button>
+      <button onclick="removeOrder(this)" class="btn-secondary">Remove</button>
+    </div>
+    <button class="btn-secondary" onclick="goToHome()">Back to Home</button>
+  </div>
+
+  <!-- Demand Page -->
+  <div class="container hidden" id="demandPage">
+    <h1>Select Profession</h1>
+    <select id="profession">
+      <option>Plumber</option>
+      <option>Electrician</option>
+      <option>Painter</option>
+    </select>
+    <button onclick="goToCustomise()">Next</button>
+    <button class="btn-secondary" onclick="goToHome()">Back to Home</button>
+  </div>
+
+  <!-- Customise Page -->
+  <div class="container hidden" id="customisePage">
+    <h1>Customise Order</h1>
+    <input type="text" placeholder="Describe your need...">
+    <button onclick="goToConfirmOrder()">Order</button>
+  </div>
+
+  <!-- Confirm Order Page -->
+  <div class="container hidden" id="confirmOrderPage">
+    <h1>Order Confirmed!</h1>
+    <p>Thank you for your order.</p>
+    <button onclick="goToHome()">Back to Home</button>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
+      document.getElementById(pageId).classList.remove('hidden');
+    }
+    function goToHome() {
+      showPage('homePage');
+    }
+    function goToDeal() {
+      showPage('dealPage');
+    }
+    function goToDemand() {
+      showPage('demandPage');
+    }
+    function goToCustomise() {
+      showPage('customisePage');
+    }
+    function goToConfirmOrder() {
+      showPage('confirmOrderPage');
+    }
+    function confirmOrder(button) {
+      button.parentElement.innerHTML = "✅ Order Confirmed!";
+    }
+    function removeOrder(button) {
+      button.parentElement.remove();
+    }
+  </script>
+</body>
+</html>

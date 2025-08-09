@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Place Your Order</title>
+  <style>
+    :root {
+      --luxe-noir: #060D0C;
+      --soft-oat: #F0EDE5;
+      --accent: #8FCB81;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background-color: var(--luxe-noir);
+      color: var(--soft-oat);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 30px 20px;
+    }
+
+    .order-form {
+      background-color: rgba(240, 237, 229, 0.04);
+      padding: 35px;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      max-width: 650px;
+      backdrop-filter: blur(6px);
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    section {
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(240, 237, 229, 0.1);
+    }
+
+    label {
+      font-weight: 500;
+      display: block;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(240, 237, 229, 0.2);
+      border-radius: 6px;
+      background-color: rgba(240, 237, 229, 0.05);
+      color: var(--soft-oat);
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background-color: rgba(240, 237, 229, 0.08);
+    }
+
+    textarea {
+      height: 100px;
+    }
+
+    .spec-list input {
+      margin-bottom: 10px;
+    }
+
+    .addons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .addons label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: normal;
+      border: 1px solid rgba(240, 237, 229, 0.2);
+      padding: 8px 10px;
+      border-radius: 6px;
+      background-color: rgba(240, 237, 229, 0.05);
+      cursor: pointer;
+    }
+
+    .addons input {
+      accent-color: var(--accent);
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 14px;
+      background-color: var(--soft-oat);
+      color: var(--luxe-noir);
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #d8d4cb;
+      transform: translateY(-2px);
+    }
+
+    .order-link-button {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 14px;
+      margin-top: 12px;
+      background-color: transparent;
+      color: var(--soft-oat);
+      border: 2px solid var(--soft-oat);
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .order-link-button:hover {
+      background-color: var(--soft-oat);
+      color: var(--luxe-noir);
+      transform: translateY(-2px);
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      color: var(--soft-oat);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .info-box {
+      background-color: rgba(240, 237, 229, 0.05);
+      border-left: 4px solid var(--accent);
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      margin-top: 25px;
+      color: #ccc;
+    }
+
+    .summary-box {
+      background-color: rgba(240, 237, 229, 0.05);
+      border: 1px solid rgba(240, 237, 229, 0.1);
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .error {
+      background-color: rgba(255, 0, 0, 0.1);
+      color: #ff8a8a;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="order-form">
+    <h1>Place Your Order</h1>
+    <p class="subtitle">Fill in the details to request your custom handmade product.</p>
+
+    <!-- Customer Info -->
+    <section>
+      <label for="name">Your Name</label>
+      <input type="text" id="name" placeholder="Enter your full name" />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="Enter your phone number" />
+    </section>
+
+    <!-- Order Details -->
+    <section>
+      <label for="category">Order Category</label>
+      <select id="category" onchange="updateProfessions()">
+        <option value="">-- Choose Category --</option>
+        <option value="Fashion">Fashion</option>
+        <option value="Home Decor">Home Decor</option>
+        <option value="Art">Art</option>
+        <option value="Jewelry">Jewelry</option>
+      </select>
+
+      <label for="profession">Profession</label>
+      <select id="profession" onchange="updateSubOptions()">
+        <option value="">-- Choose Profession --</option>
+      </select>
+
+      <label for="sub-category">Specialization</label>
+      <select id="sub-category">
+        <option value="">-- Choose Specialization --</option>
+      </select>
+
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" min="1" value="1" />
+
+      <label for="budget">Budget Range</label>
+      <select id="budget">
+        <option value="">-- Select Budget --</option>
+        <option value="Under $50">Under $50</option>
+        <option value="$50 - $150">$50 - $150</option>
+        <option value="$150 - $300">$150 - $300</option>
+        <option value="Above $300">Above $300</option>
+      </select>
+    </section>
+
+    <!-- Specifications -->
+    <section>
+      <h3>Specifications</h3>
+      <div class="spec-list">
+        <input type="text" placeholder="Size / Dimensions" id="spec-size" />
+        <input type="text" placeholder="Material Preference" id="spec-material" />
+        <input type="text" placeholder="Color Preference" id="spec-color" />
+        <input type="text" placeholder="Other Notes" id="spec-notes" />
+      </div>
+    </section>
+
+    <!-- Add-ons -->
+    <section>
+      <h3>Optional Add-ons</h3>
+      <div class="addons">
+        <label><input type="checkbox" value="Gift Wrapping"> Gift Wrapping</label>
+        <label><input type="checkbox" value="Express Delivery"> Express Delivery</label>
+        <label><input type="checkbox" value="Personalized Note"> Personalized Note</label>
+        <label><input type="checkbox" value="Premium Packaging"> Premium Packaging</label>
+      </div>
+    </section>
+
+    <!-- Upload Reference -->
+    <section>
+      <label for="reference">Upload Reference Image (Optional)</label>
+      <input type="file" id="reference" accept="image/*" />
+    </section>
+
+    <!-- Custom Details -->
+    <section>
+      <label for="details">Custom Order Details</label>
+      <textarea id="details" placeholder="Describe your item, design preferences, etc."></textarea>
+
+      <label for="delivery">Preferred Delivery Date</label>
+      <input type="date" id="delivery" />
+    </section>
+
+    <!-- Order Summary -->
+    <section>
+      <h3>Live Summary</h3>
+      <div class="summary-box" id="summary">
+        Fill out the form to see your order summary here.
+      </div>
+    </section>
+
+    <div id="error-box" class="error">⚠ Please fill in all required fields.</div>
+
+    <div class="info-box">
+      📌 <strong>Note:</strong> Estimated delivery is <span id="est-date"></span> if you choose today's date.
+    </div>
+
+    <!-- Buttons -->
+    <button onclick="submitOrder()">Place Order</button>
+    <a href="order.html" class="order-link-button">🛒 Order Now (Direct)</a>
+    <a href="./home.html" class="back-link">← Back to Home</a>
+  </div>
+
+  <script>
+    const categoryMap = {
+      "Fashion": ["Tailor", "Designer"],
+      "Home Decor": ["Carpenter", "Handicraft"],
+      "Art": ["Painter", "Sculptor"],
+      "Jewelry": ["Jeweler"]
+    };
+
+    const subOptions = {
+      "Tailor": ["Wedding Dress", "Casual Wear", "Ethnic Wear", "Custom Embroidery"],
+      "Designer": ["Gowns", "Streetwear", "Costume Design"],
+      "Carpenter": ["Furniture", "Home Decor", "Custom Shelves", "Wooden Sculptures"],
+      "Handicraft": ["Baskets", "Macrame", "Crochet", "Hand-painted Items"],
+      "Painter": ["Portrait", "Landscape", "Abstract", "Mural"],
+      "Sculptor": ["Stone", "Metal", "Clay", "Custom Figurines"],
+      "Jeweler": ["Necklace", "Bracelet", "Rings", "Custom Design"]
+    };
+
+    function updateProfessions() {
+      const category = document.getElementById('category').value;
+      const professionSelect = document.getElementById('profession');
+      professionSelect.innerHTML = "<option value=''>-- Choose Profession --</option>";
+      if (categoryMap[category]) {
+        categoryMap[category].forEach(prof => {
+          const opt = document.createElement('option');
+          opt.value = prof;
+          opt.textContent = prof;
+          professionSelect.appendChild(opt);
+        });
+      }
+      updateSummary();
+    }
+
+    function updateSubOptions() {
+      const profession = document.getElementById('profession').value;
+      const subCategory = document.getElementById('sub-category');
+      subCategory.innerHTML = "<option value=''>-- Choose Specialization --</option>";
+      if (subOptions[profession]) {
+        subOptions[profession].forEach(item => {
+          const option = document.createElement('option');
+          option.value = item;
+          option.textContent = item;
+          subCategory.appendChild(option);
+        });
+      }
+      updateSummary();
+    }
+
+    function setEstimatedDate() {
+      const today = new Date();
+      today.setDate(today.getDate() + 14);
+      document.getElementById('est-date').textContent = today.toDateString();
+    }
+
+    function updateSummary() {
+      const summary = document.getElementById('summary');
+      const name = document.getElementById('name').value;
+      const category = document.getElementById('category').value;
+      const profession = document.getElementById('profession').value;
+      const subCat = document.getElementById('sub-category').value;
+      const qty = document.getElementById('quantity').value;
+      const budget = document.getElementById('budget').value;
+      const specs = [
+        document.getElementById('spec-size').value,
+        document.getElementById('spec-material').value,
+        document.getElementById('spec-color').value,
+        document.getElementById('spec-notes').value
+      ].filter(s => s).join(", ");
+      const addons = Array.from(document.querySelectorAll('.addons input:checked')).map(a => a.value).join(", ");
+
+      summary.innerHTML = `
+        <strong>Name:</strong> ${name || "-"}<br>
+        <strong>Category:</strong> ${category || "-"}<br>
+        <strong>Profession:</strong> ${profession || "-"}<br>
+        <strong>Specialization:</strong> ${subCat || "-"}<br>
+        <strong>Quantity:</strong> ${qty || "-"}<br>
+        <strong>Budget:</strong> ${budget || "-"}<br>
+        <strong>Specifications:</strong> ${specs || "-"}<br>
+        <strong>Add-ons:</strong> ${addons || "None"}
+      `;
+    }
+
+    function submitOrder() {
+      const fields = ['name','email','phone','category','profession','sub-category','quantity','budget','details','delivery'];
+      let valid = true;
+      fields.forEach(id => {
+        if (!document.getElementById(id).value.trim()) valid = false;
+      });
+
+      if (!valid) {
+        document.getElementById('error-box').style.display = 'block';
+        return;
+      }
+
+      alert(✅ Order placed successfully for a ${document.getElementById('sub-category').value} by ${document.getElementById('profession').value}.);
+      window.location.href = "order.html";
+    }
+
+    document.querySelectorAll("input, select, textarea").forEach(el => {
+      el.addEventListener("input", updateSummary);
+    });
+
+    setEstimatedDate();
+  </script>
+
+</body>
+</html>

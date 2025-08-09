@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Craft Orders</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background-color: #060D0C; /* Luxe Noir */
+      color: #F0EDE5; /* Soft Oat */
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      background-color: rgba(240, 237, 229, 0.03); /* Soft glass look */
+      padding: 30px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 900px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    .features {
+      background-color: rgba(240, 237, 229, 0.05);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .features div {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .order-card {
+      background-color: rgba(240, 237, 229, 0.05);
+      border-left: 5px solid #F0EDE5;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .order-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(240, 237, 229, 0.08);
+    }
+
+    .order-card h3 {
+      margin: 0 0 8px;
+    }
+
+    .order-card p {
+      margin: 5px 0;
+      color: #ddd;
+    }
+
+    .status {
+      font-weight: bold;
+      margin-top: 8px;
+      color: #aaa;
+    }
+
+    .confirmed {
+      color: #8FCB81; /* soft green for confirmed */
+    }
+
+    .order-actions {
+      margin-top: 12px;
+    }
+
+    button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .accept-btn {
+      background-color: #F0EDE5;
+      color: #060D0C;
+    }
+
+    .accept-btn:hover {
+      background-color: #d8d4cb;
+    }
+
+    .remove-btn {
+      background-color: transparent;
+      color: #F0EDE5;
+      border: 1px solid #F0EDE5;
+    }
+
+    .remove-btn:hover {
+      background-color: #F0EDE5;
+      color: #060D0C;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 30px;
+      text-align: center;
+      background-color: transparent;
+      border: 2px solid #F0EDE5;
+      color: #F0EDE5;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #F0EDE5;
+      color: #060D0C;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Craft Orders</h1>
+    <p class="subtitle">Manage and track all your incoming handmade orders in one place.</p>
+
+    <!-- Features -->
+    <div class="features">
+      <div>📦 <strong>Quick Updates:</strong> Accept or remove orders instantly.</div>
+      <div>⏳ <strong>Status Tracking:</strong> See pending and confirmed orders clearly.</div>
+      <div>🎨 <strong>Custom Work:</strong> Keep track of design and material details.</div>
+    </div>
+
+    <!-- Order 1 -->
+    <div class="order-card" id="order1">
+      <h3>Tailor</h3>
+      <p><strong>Item:</strong> Handmade ethnic dress</p>
+      <p><strong>Size:</strong> Medium | <strong>Color:</strong> Maroon with gold embroidery</p>
+      <p><strong>Order Date:</strong> 01 Aug 2025 | <strong>Delivery:</strong> 15 Aug 2025</p>
+      <p class="status" id="status-order1">Status: Pending</p>
+      <div class="order-actions">
+        <button class="accept-btn" onclick="acceptOrder('order1')">Accept</button>
+        <button class="remove-btn" onclick="removeOrder('order1')">Remove</button>
+      </div>
+    </div>
+
+    <!-- Order 2 -->
+    <div class="order-card" id="order2">
+      <h3>Pottery Artist</h3>
+      <p><strong>Item:</strong> Set of 4 hand-painted tea cups</p>
+      <p><strong>Design:</strong> Floral, pastel blue & white</p>
+      <p><strong>Order Date:</strong> 03 Aug 2025 | <strong>Delivery:</strong> 17 Aug 2025</p>
+      <p class="status" id="status-order2">Status: Pending</p>
+      <div class="order-actions">
+        <button class="accept-btn" onclick="acceptOrder('order2')">Accept</button>
+        <button class="remove-btn" onclick="removeOrder('order2')">Remove</button>
+      </div>
+    </div>
+
+    <!-- Order 3 -->
+    <div class="order-card" id="order3">
+      <h3>Jeweler</h3>
+      <p><strong>Item:</strong> Long gold-colored chain</p>
+      <p><strong>Details:</strong> Hook design, slim & lightweight</p>
+      <p><strong>Order Date:</strong> 05 Aug 2025 | <strong>Delivery:</strong> 18 Aug 2025</p>
+      <p class="status" id="status-order3">Status: Pending</p>
+      <div class="order-actions">
+        <button class="accept-btn" onclick="acceptOrder('order3')">Accept</button>
+        <button class="remove-btn" onclick="removeOrder('order3')">Remove</button>
+      </div>
+    </div>
+
+    <!-- Order 4 -->
+    <div class="order-card" id="order4">
+      <h3>Crochet Maker</h3>
+      <p><strong>Item:</strong> Baby sweater set</p>
+      <p><strong>Details:</strong> Soft wool, pastel yellow, 6–12 months</p>
+      <p><strong>Order Date:</strong> 06 Aug 2025 | <strong>Delivery:</strong> 19 Aug 2025</p>
+      <p class="status" id="status-order4">Status: Pending</p>
+      <div class="order-actions">
+        <button class="accept-btn" onclick="acceptOrder('order4')">Accept</button>
+        <button class="remove-btn" onclick="removeOrder('order4')">Remove</button>
+      </div>
+    </div>
+
+    <!-- Order 5 -->
+    <div class="order-card" id="order5">
+      <h3>Wood Carver</h3>
+      <p><strong>Item:</strong> Custom nameplate with floral border</p>
+      <p><strong>Material:</strong> Teak wood, hand-painted</p>
+      <p><strong>Order Date:</strong> 07 Aug 2025 | <strong>Delivery:</strong> 21 Aug 2025</p>
+      <p class="status" id="status-order5">Status: Pending</p>
+      <div class="order-actions">
+        <button class="accept-btn" onclick="acceptOrder('order5')">Accept</button>
+        <button class="remove-btn" onclick="removeOrder('order5')">Remove</button>
+      </div>
+    </div>
+
+    <a href="home.html" class="back-button">⬅ Back to Home</a>
+  </div>
+
+  <script>
+    function acceptOrder(id) {
+      const order = document.getElementById(id);
+      const status = order.querySelector('.status');
+      status.textContent = 'Status: Confirmed ✅';
+      status.classList.add('confirmed');
+    }
+
+    function removeOrder(id) {
+      const order = document.getElementById(id);
+      order.remove();
+    }
+  </script>
+
+</body>
+</html>
